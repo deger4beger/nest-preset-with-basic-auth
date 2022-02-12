@@ -1,0 +1,13 @@
+setup:
+    addons:
+        - plan: heroku-postgresql
+        as: DATABASE
+    config:
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: deger
+        POSTGRES_DB: chatdb
+build:
+    docker:
+        api: Dockerfile
+    config:
+        NODE_ENV: development

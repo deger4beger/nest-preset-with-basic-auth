@@ -7,18 +7,26 @@ import { HttpErrorFilter } from './shared/httpError.filter';
 import { LoggingInterceptor } from './shared/logging.interceptor';
 import { PG_DB, PG_HOST, PG_PASSWORD, PG_PORT, PG_USERNAME } from '../config/config';
 
+const dbSettings = process.env.DATABASE_URL ?
+    {
+        type: 'postgres',
+        url: process.env.DATABASE_URL,
+        entities: ["dist/**/*.entity{.ts,.js}"],
+        synchronize: true,
+    } : {
+        type: 'postgres',
+        host: PG_HOST,
+        port: Number(PG_PORT),
+        username: PG_USERNAME,
+        password: PG_PASSWORD,
+        database: PG_DB,
+        entities: ["dist/**/*.entity{.ts,.js}"],
+        synchronize: true,
+    }
+
 @Module({
     imports: [
-        TypeOrmModule.forRoot({
-            type: 'postgres',
-            host: PG_HOST,
-            port: Number(PG_PORT),
-            username: PG_USERNAME,
-            password: PG_PASSWORD,
-            database: PG_DB,
-            entities: ["dist/**/*.entity{.ts,.js}"],
-            synchronize: true,
-        }),
+        TypeOrmModule.forRoot(dbSettings as any),
         UserModule
     ],
     providers: [

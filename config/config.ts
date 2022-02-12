@@ -1,4 +1,4 @@
-export const NODE_PORT = process.env.NODE_PORT || 3030
+export const NODE_PORT = process.env.PORT || 3030
 export const JWT_SECRET = process.env.JWT_SECRET || "ergrtogmhjoijn546oihj54u66456t4yuf6ty456o54nm6lk4j56"
 export const PG_HOST = process.env.PG_HOST || "localhost"
 export const PG_PORT = process.env.PG_PORT || 3060

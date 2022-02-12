@@ -10,7 +10,7 @@ console.log(process.env.DATABASE_URL, "UYRLLLLLL")
 const dbSettings = process.env.DATABASE_URL ?
     {
         type: 'postgres',
-        url: process.env.DATABASE_URL,
+        url: "postgres://ajktojnwpylgyb:7089e6d5bf14b58a1393bc5eb4d18d01b31016287a3b7f1330ae599b47ee718c@ec2-35-153-35-94.compute-1.amazonaws.com:5432/dd7mrnitjr2gbk",
         entities: ["dist/**/*.entity{.ts,.js}"],
         synchronize: true,
     } : {

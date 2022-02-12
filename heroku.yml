@@ -3,11 +3,9 @@ setup:
     -   plan: heroku-postgresql
         as: DATABASE
     config:
-        POSTGRES_USER: postgres
-        POSTGRES_PASSWORD: deger
-        POSTGRES_DB: chatdb
+        NODE_ENV: development
 build:
     docker:
-        api: Dockerfile
+        web: Dockerfile
     config:
         NODE_ENV: development

@@ -6,7 +6,7 @@ import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { HttpErrorFilter } from './shared/httpError.filter';
 import { LoggingInterceptor } from './shared/logging.interceptor';
 import { PG_DB, PG_HOST, PG_PASSWORD, PG_PORT, PG_USERNAME } from '../config/config';
-
+console.log(process.env.DATABASE_URL, "UYRLLLLLL")
 const dbSettings = process.env.DATABASE_URL ?
     {
         type: 'postgres',

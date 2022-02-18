@@ -43,4 +43,5 @@ const dbSettings = process.env.DATABASE_URL ?
         }
     ]
 })
+
 export class AppModule {}

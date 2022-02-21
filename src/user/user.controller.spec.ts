@@ -7,19 +7,27 @@ describe('UserController', () => {
 
     let controller: UserController;
     const mockService = {
-        register: jest.fn((dto) => {
-            return {
-                id: Date.now(),
-                ...dto
+        register: jest
+            .fn()
+            .mockImplementation((dto) => {
+                return Promise.resolve({
+                    id: Date.now(),
+                    ...dto
+                })
             }
-        }),
-        login: jest.fn((dto) => dto),
-        updateUsername: jest.fn((id, username) => {
-            return {
-                id,
-                username
+        ),
+        login: jest
+            .fn()
+            .mockImplementation((dto) => Promise.resolve(dto)),
+        updateUsername: jest
+            .fn()
+            .mockImplementation((id, username) => {
+                return Promise.resolve({
+                    id,
+                    username
+                })
             }
-        })
+        )
     }
 
     beforeEach(async () => {
@@ -36,12 +44,13 @@ describe('UserController', () => {
         expect(controller).toBeDefined()
     })
 
-    it("should register new user", () => {
+    it("should register new user", async () => {
+
         const dto = {
             username: "name",
             password: "morpex"
         }
-        expect(controller.register(dto)).toEqual({
+        await expect(controller.register(dto)).resolves.toEqual({
             ...dto,
             id: expect.any(Number)
         })
@@ -51,26 +60,28 @@ describe('UserController', () => {
 
     })
 
-    it("should login user", () => {
+    it("should login user", async () => {
+
         const dto = {
             username: "name",
             password: "morpex"
         }
 
-        expect(controller.login(dto)).toEqual(dto)
+        await expect(controller.login(dto)).resolves.toEqual(dto)
 
         expect(mockService.login).toHaveBeenCalledWith(dto)
         expect(mockService.login).toHaveBeenCalledTimes(1)
 
     })
 
-    it("should update username", () => {
+    it("should update username", async () => {
+
         const dto = {
             username: "name"
         },
         id = "someid"
 
-        expect(controller.changeUsername(id, dto)).toEqual({
+        await expect(controller.changeUsername(id, dto)).resolves.toEqual({
             ...dto,
             id
         })

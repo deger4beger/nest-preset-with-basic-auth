@@ -44,51 +44,50 @@ describe('UserController', () => {
         expect(controller).toBeDefined()
     })
 
-    it("should register new user", async () => {
+    describe("register", () => {
+        it("should register new user", async () => {
+            const dto = {
+                username: "name",
+                password: "morpex"
+            }
+            await expect(controller.register(dto)).resolves.toEqual({
+                ...dto,
+                id: expect.any(Number)
+            })
 
-        const dto = {
-            username: "name",
-            password: "morpex"
-        }
-        await expect(controller.register(dto)).resolves.toEqual({
-            ...dto,
-            id: expect.any(Number)
+            expect(mockService.register).toHaveBeenCalledWith(dto)
+            expect(mockService.register).toHaveBeenCalledTimes(1)
         })
-
-        expect(mockService.register).toHaveBeenCalledWith(dto)
-        expect(mockService.register).toHaveBeenCalledTimes(1)
-
     })
 
-    it("should login user", async () => {
+    describe("login", () => {
+        it("should login user", async () => {
+            const dto = {
+                username: "name",
+                password: "morpex"
+            }
 
-        const dto = {
-            username: "name",
-            password: "morpex"
-        }
+            await expect(controller.login(dto)).resolves.toEqual(dto)
 
-        await expect(controller.login(dto)).resolves.toEqual(dto)
-
-        expect(mockService.login).toHaveBeenCalledWith(dto)
-        expect(mockService.login).toHaveBeenCalledTimes(1)
-
-    })
-
-    it("should update username", async () => {
-
-        const dto = {
-            username: "name"
-        },
-        id = "someid"
-
-        await expect(controller.changeUsername(id, dto)).resolves.toEqual({
-            ...dto,
-            id
+            expect(mockService.login).toHaveBeenCalledWith(dto)
+            expect(mockService.login).toHaveBeenCalledTimes(1)
         })
-
-        expect(mockService.updateUsername).toHaveBeenCalledWith(id, dto.username)
-        expect(mockService.updateUsername).toHaveBeenCalledTimes(1)
-
     })
 
+    describe("changeUsername", () => {
+        it("should update username", async () => {
+            const dto = {
+                username: "name"
+            },
+            id = "someid"
+
+            await expect(controller.changeUsername(id, dto)).resolves.toEqual({
+                ...dto,
+                id
+            })
+
+            expect(mockService.updateUsername).toHaveBeenCalledWith(id, dto.username)
+            expect(mockService.updateUsername).toHaveBeenCalledTimes(1)
+        })
+    })
 })

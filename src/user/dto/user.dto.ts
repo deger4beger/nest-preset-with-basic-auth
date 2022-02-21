@@ -12,7 +12,7 @@ export class UserDTO {
 
 }
 
-export class UpdateUsername extends PickType(UserDTO, ['username'] as const) {}
+export class UpdateUsernameDTO extends PickType(UserDTO, ['username'] as const) {}
 
 export class UserRO {
 	id: string

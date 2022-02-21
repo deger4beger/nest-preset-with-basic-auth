@@ -1,7 +1,7 @@
 import { Body, Controller, Post, UsePipes, Patch, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
 import { ValidationPipe } from '../shared/validation.pipe';
-import { UpdateUsername, UserDTO } from './dto/user.dto';
+import { UpdateUsernameDTO, UserDTO } from './dto/user.dto';
 import { AuthGuard } from '../shared/auth.guard';
 import { User } from './user.decorator';
 
@@ -26,7 +26,7 @@ export class UserController {
     @UsePipes(ValidationPipe)
     changeUsername(
         @User("id") userId: string,
-        @Body() usernameData: UpdateUsername
+        @Body() usernameData: UpdateUsernameDTO
     ) {
         return this.userService.updateUsername(userId, usernameData.username)
     }

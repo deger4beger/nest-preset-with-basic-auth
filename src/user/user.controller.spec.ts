@@ -14,6 +14,12 @@ describe('UserController', () => {
             }
         }),
         login: jest.fn((dto) => dto),
+        updateUsername: jest.fn((id, username) => {
+            return {
+                id,
+                username
+            }
+        })
     }
 
     beforeEach(async () => {
@@ -55,6 +61,22 @@ describe('UserController', () => {
 
         expect(mockService.login).toHaveBeenCalledWith(dto)
         expect(mockService.login).toHaveBeenCalledTimes(1)
+
+    })
+
+    it("should update username", () => {
+        const dto = {
+            username: "name"
+        },
+        id = "someid"
+
+        expect(controller.changeUsername(id, dto)).toEqual({
+            ...dto,
+            id
+        })
+
+        expect(mockService.updateUsername).toHaveBeenCalledWith(id, dto.username)
+        expect(mockService.updateUsername).toHaveBeenCalledTimes(1)
 
     })
 

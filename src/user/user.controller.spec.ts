@@ -6,7 +6,7 @@ import { ValidationPipe } from '../shared/validation.pipe';
 describe('UserController', () => {
 
     let controller: UserController;
-    const mockService = {
+    let service = {
         register: jest
             .fn()
             .mockImplementation((dto) => {
@@ -34,7 +34,10 @@ describe('UserController', () => {
         const moduleRef = await Test.createTestingModule({
             controllers: [UserController],
             providers: [UserService],
-        }).overrideProvider(UserService).useValue(mockService).compile()
+        })
+            .overrideProvider(UserService)
+            .useValue(service)
+            .compile()
 
         controller = moduleRef.get<UserController>(UserController)
 
@@ -55,8 +58,8 @@ describe('UserController', () => {
                 id: expect.any(Number)
             })
 
-            expect(mockService.register).toHaveBeenCalledWith(dto)
-            expect(mockService.register).toHaveBeenCalledTimes(1)
+            expect(service.register).toHaveBeenCalledWith(dto)
+            expect(service.register).toHaveBeenCalledTimes(1)
         })
     })
 
@@ -69,8 +72,8 @@ describe('UserController', () => {
 
             await expect(controller.login(dto)).resolves.toEqual(dto)
 
-            expect(mockService.login).toHaveBeenCalledWith(dto)
-            expect(mockService.login).toHaveBeenCalledTimes(1)
+            expect(service.login).toHaveBeenCalledWith(dto)
+            expect(service.login).toHaveBeenCalledTimes(1)
         })
     })
 
@@ -86,8 +89,8 @@ describe('UserController', () => {
                 id
             })
 
-            expect(mockService.updateUsername).toHaveBeenCalledWith(id, dto.username)
-            expect(mockService.updateUsername).toHaveBeenCalledTimes(1)
+            expect(service.updateUsername).toHaveBeenCalledWith(id, dto.username)
+            expect(service.updateUsername).toHaveBeenCalledTimes(1)
         })
     })
 })

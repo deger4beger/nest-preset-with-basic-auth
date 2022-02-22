@@ -1,7 +1,7 @@
 import { Test } from '@nestjs/testing';
-import { UserController } from './user.controller';
-import { UserService } from './user.service';
-import { ValidationPipe } from '../shared/validation.pipe';
+import { UserController } from '../user.controller';
+import { UserService } from '../user.service';
+import { ValidationPipe } from '../../shared/validation.pipe';
 
 describe('UserController', () => {
 

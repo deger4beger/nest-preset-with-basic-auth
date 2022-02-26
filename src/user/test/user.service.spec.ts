@@ -28,21 +28,4 @@ describe('UserService', () => {
         expect(service).toBeDefined()
     })
 
-    // it("should login user", async () => {
-
-    //     const userData = {
-    //         username: "username",
-    //         password: "password"
-    //     }
-
-    //     const response = await service.login(userData)
-
-    //     expect(response).toEqual({
-    //         id: expect.any(Number),
-    //         token: expect.any(Number),
-    //         ...userData
-    //     })
-
-    // })
-
 })

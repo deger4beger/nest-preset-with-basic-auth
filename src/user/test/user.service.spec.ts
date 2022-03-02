@@ -24,8 +24,8 @@ describe('UserService', () => {
 
     })
 
-    it("service should be defined", () => {
-        expect(service).toBeDefined()
-    })
+    // it("service should be defined", () => {
+    //     expect(service).toBeDefined()
+    // })
 
 })

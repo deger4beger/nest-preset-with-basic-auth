@@ -16,13 +16,11 @@ export class HttpErrorFilter implements ExceptionFilter {
 				exception.response.message ) : (
 				exception.message )
 		}
-
 		Logger.error(
 			`${request.method} ${request.url}`,
 			JSON.stringify(errorResponse),
 			"ExceptionFilter"
 		)
-
 		response.status(status).json(errorResponse)
 	}
 }

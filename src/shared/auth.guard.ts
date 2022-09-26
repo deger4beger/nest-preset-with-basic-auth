@@ -1,6 +1,6 @@
 import { ForbiddenException, Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
 import * as jwt from "jsonwebtoken"
-import { JWT_SECRET } from '../../config/config';
+const JWT_SECRET = process.env.JWT_SECRET
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -11,12 +11,9 @@ export class AuthGuard implements CanActivate {
     	if(!request.headers.authorization) {
     		return false
     	}
-
     	request.user = await this.validateToken(request.headers.authorization)
-
     	return true
  	}
-
  	async validateToken(auth: string) {
  		if(auth.split(" ")[0] !== "Bearer") {
  			throw new ForbiddenException("Invalid token")

@@ -9,7 +9,7 @@ import {
 import * as bcrypt from "bcryptjs"
 import * as jwt from "jsonwebtoken"
 import { UserRO } from '../dto/user.dto';
-import { JWT_SECRET } from '../../../config/config';
+const JWT_SECRET = process.env.JWT_SECRET
 
 @Entity("user")
 export class UserEntity {

@@ -6,8 +6,6 @@ export class ValidatePayloadExistsPipe implements PipeTransform {
     	if (!Object.keys(payload).length) {
         	throw new BadRequestException('Validation failed: No body submitted')
     	}
-
     return payload
-
     }
 }
